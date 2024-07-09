@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Country} from "./shared/enum/country";
+import {CheckUserResponseData} from "./shared/interface/responses";
 
 @Component({
   selector: 'app-root',
@@ -10,13 +10,12 @@ import {Country} from "./shared/enum/country";
 })
 export class AppComponent {
 
-  constructor(private http: HttpClient) {}
-
-  getRegion(country: Country): Observable<{region: string}> {
-    return this.http.post<{region: string}>('/api/regions', {country});
+  constructor(private http: HttpClient) {
   }
 
-  checkUser(username: string): Observable<{ isAvailable: boolean }> {
-    return this.http.post<{ isAvailable: boolean }>('/api/checkUsername', { username });
+
+  // just an example, you are free to move it anywhere
+  checkUser(username: string): Observable<CheckUserResponseData> {
+    return this.http.post<CheckUserResponseData>('/api/checkUsername1', {username});
   }
 }
