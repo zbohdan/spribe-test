@@ -1,0 +1,49 @@
+<div class="card form-card">
+  <form class="card-body" [formGroup]="userFormGroup" autocomplete="off">
+    <button
+      class="btn position-absolute top-0 end-0"
+      [disabled]="userFormGroup.disabled"
+      (click)="removeUserFormCard()"
+    ><i class="bi-x"></i></button>
+
+    <div class="mb-4">
+      <label for="country-input" class="form-label">{{ UserFormLabel.Country }}</label>
+      <input
+        id="country-input"
+        type="text"
+        class="form-control"
+        formControlName="country"
+        appInputValidator
+        [errorInputName]="UserFormLabel.Country"
+        [ngbTypeahead]="search"
+        (blur)="onBlur()"
+      >
+    </div>
+
+    <div class="mb-4">
+      <label for="user-name-input" class="form-label">{{ UserFormLabel.Username }}</label>
+      <input
+        id="user-name-input"
+        type="text"
+        class="form-control"
+        formControlName="username"
+        appInputValidator
+        [errorInputName]="UserFormLabel.Username"
+        (blur)="onBlur()"
+      >
+    </div>
+
+    <div class="mb-4">
+      <label for="birthday-input" class="form-label">{{ UserFormLabel.Birthday }}</label>
+      <input
+        id="birthday-input"
+        type="date"
+        class="form-control"
+        formControlName="birthday"
+        appInputValidator
+        [errorInputName]="UserFormLabel.Birthday"
+        (blur)="onBlur()"
+      >
+    </div>
+  </form>
+</div>

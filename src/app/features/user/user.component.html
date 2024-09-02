@@ -1,0 +1,36 @@
+<app-delayed-submit-button
+  submitBtnText="Submit all forms"
+  [delay]="5"
+  [isSubmitDisabled]="!!invalidFormsCount || isSomeFormInPendingState || !userCardDataArray.length"
+  (submit)="onSubmit()"
+  (cancel)="onCancel()"
+>
+  @if (invalidFormsCount) {
+    <span class="text-danger">Invalid forms: {{ invalidFormsCount }}</span>
+  }
+
+  @if (isSomeFormInPendingState) {
+    <div class="spinner-border spinner-border-sm text-secondary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <span class="text-secondary">Validation in progress...</span>
+  }
+</app-delayed-submit-button>
+
+<div class="d-flex flex-wrap gap-3">
+  @for (userCardData of userCardDataArray; track userCardData.id) {
+    <app-user-form-card
+      [formControl]="userCardData.formControl"
+      (remove)="onRemoveUserCardData(userCardData.id)"
+    ></app-user-form-card>
+  }
+
+  <button
+    type="button"
+    class="btn button-card bg-gradient"
+    [disabled]="isAddCardDisabled"
+    (click)="onAddUserCardData()"
+  >
+    <div class="button-card-content"><i class="bi-plus"></i></div>
+  </button>
+</div>

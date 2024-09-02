@@ -1,7 +1,8 @@
 import {HttpHandler, HttpInterceptor, HttpRequest, HttpResponse} from '@angular/common/http';
 import {Injectable} from "@angular/core";
 import {delay, Observable, of, tap} from "rxjs";
-import {CheckUserResponseData, SubmitFormResponseData} from "../interface/responses";
+import {CheckUserResponseData} from "@shared/interfaces/check-user-response-data.interface";
+import {SubmitFormResponseData} from "@shared/interfaces/submit-form-response-data.interface";
 
 @Injectable()
 export class MockBackendInterceptor implements HttpInterceptor {
@@ -14,21 +15,21 @@ export class MockBackendInterceptor implements HttpInterceptor {
       return this.handleSubmitForm();
     }
 
-    return of(new HttpResponse({ status: 404, body: { result: 'You are using the wrong endpoint'} }));
+    return of(new HttpResponse({status: 404, body: {result: 'You are using the wrong endpoint'}}));
   }
 
   private handleCheckUsername(req: HttpRequest<any>): Observable<HttpResponse<CheckUserResponseData>> {
     const isAvailable = req.body.username.includes('new');
-    const response = new HttpResponse({ status: 200, body: { isAvailable } });
+    const response = new HttpResponse({status: 200, body: {isAvailable}});
 
     return of(response).pipe(
       delay(500),
-      tap(() => console.log('checkUsername response:', { isAvailable }))
+      tap(() => console.log('checkUsername response:', {isAvailable}))
     );
   }
 
   private handleSubmitForm(): Observable<HttpResponse<SubmitFormResponseData>> {
-    const response = new HttpResponse({ status: 200, body: { result: 'nice job' } });
+    const response = new HttpResponse({status: 200, body: {result: 'nice job'}});
 
     return of(response).pipe(
       delay(500),

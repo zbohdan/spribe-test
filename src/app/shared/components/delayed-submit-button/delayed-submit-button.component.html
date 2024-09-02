@@ -1,0 +1,31 @@
+<div class="d-flex align-items-center gap-2 mb-3">
+  @if (!isSubmitCountdownStarted) {
+    <button
+      type="button"
+      class="btn btn-primary"
+      [disabled]="isSubmitDisabled"
+      (click)="onSubmit()"
+    >
+      {{ submitBtnText }}
+    </button>
+
+    <ng-content></ng-content>
+  } @else {
+    <button
+      type="button"
+      class="btn btn-danger"
+      (click)="onCancel()"
+    >
+      {{ cancelBtnText }}
+    </button>
+
+    @if (submitCountdown) {
+      <span>{{ submitCountdown | appFormatDuration }}</span>
+    } @else {
+      <div class="spinner-border spinner-border-sm text-secondary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <span class="text-secondary">Submit in progress...</span>
+    }
+  }
+</div>

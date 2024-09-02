@@ -1,0 +1,25 @@
+@import 'bootstrap/scss/bootstrap';
+
+:host {
+  .button-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 315px;
+    height: 315px;
+    border: 2px dashed #{$secondary};
+    background: #{$light};
+
+    .button-card-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 75px;
+      height: 75px;
+      font-size: 50px;
+      border: 2px dashed #{$primary};
+      border-radius: 50%;
+      color: #{$primary};
+    }
+  }
+}
